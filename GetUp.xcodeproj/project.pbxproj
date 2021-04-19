@@ -11,6 +11,8 @@
 		9854B05F26250D9E003DE602 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9854B05E26250D9E003DE602 /* ContentView.swift */; };
 		9854B06126250DA1003DE602 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9854B06026250DA1003DE602 /* Assets.xcassets */; };
 		9854B06426250DA1003DE602 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9854B06326250DA1003DE602 /* Preview Assets.xcassets */; };
+		9854B06D262B3079003DE602 /* HelpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9854B06C262B3079003DE602 /* HelpScreen.swift */; };
+		9854B070262B310F003DE602 /* MoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9854B06F262B310F003DE602 /* MoreScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		9854B06026250DA1003DE602 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9854B06326250DA1003DE602 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9854B06526250DA1003DE602 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9854B06C262B3079003DE602 /* HelpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpScreen.swift; sourceTree = "<group>"; };
+		9854B06F262B310F003DE602 /* MoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				9854B05C26250D9E003DE602 /* GetUpApp.swift */,
 				9854B05E26250D9E003DE602 /* ContentView.swift */,
+				9854B06F262B310F003DE602 /* MoreScreen.swift */,
+				9854B06C262B3079003DE602 /* HelpScreen.swift */,
 				9854B06026250DA1003DE602 /* Assets.xcassets */,
 				9854B06526250DA1003DE602 /* Info.plist */,
 				9854B06226250DA1003DE602 /* Preview Content */,
@@ -140,6 +146,8 @@
 			files = (
 				9854B05F26250D9E003DE602 /* ContentView.swift in Sources */,
 				9854B05D26250D9E003DE602 /* GetUpApp.swift in Sources */,
+				9854B070262B310F003DE602 /* MoreScreen.swift in Sources */,
+				9854B06D262B3079003DE602 /* HelpScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
