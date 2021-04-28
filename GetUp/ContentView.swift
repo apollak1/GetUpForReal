@@ -6,7 +6,12 @@ struct ContentView: View
 {
     @State private var sittingMin = 0.0
     @State private var moveMin = 0.0
-
+    @State var timer: Timer?
+    @State var seconds = 0
+    @State var minutes = 0
+    @State var timeString = "No time to display"
+    @State var isPaused = false
+    
     var body: some View
     {
         NavigationView {
@@ -27,6 +32,7 @@ struct ContentView: View
                        VStack {
                         Slider(value: $sittingMin, in: 30.0...60.0)
                             .padding([.top, .leading, .trailing])
+                        
                         HStack {
                             Text("30")
                             Spacer()
@@ -58,30 +64,59 @@ struct ContentView: View
                 Group {
                     VStack {
                         HStack{
-                            Text("Pause Five:")
+                            Text("Add Five Minutes:")
                                 .padding()
                             Spacer()
-                            Button(action: {}, label: {
-                                Text("PAUSE")
+                            Button(action: {minutes = minutes + 5},
+                                   label: {Text("ADD FIVE")
                             })
                             .padding()
                             Spacer()
                         }
                         HStack{
-                            Button(action: {}, label: {
-                                Text("Restart")
-                            }).padding()
-                            Spacer(minLength: 134)
-                            Button(action: {}, label: {
-                                Text("STOP")
+                            Button(action: {
+                                            minutes = Int(sittingMin)
+                                            timer = Timer.scheduledTimer(withTimeInterval: 1,
+                                            repeats: true,
+                                            block: timeCalculator)
+                                        }, label: {
+                                            Text("START")
+                                        }).padding()
+                            
+                            Spacer(minLength: 50)
+                            
+                            Button(action: {
+                                if (self.isPaused) {
+                                    timer = Timer.scheduledTimer(withTimeInterval: 1,
+                                    repeats: true,
+                                    block: timeCalculator)
+                                } else {
+                                    timer?.invalidate()
+                                }
+                                self.isPaused = !self.isPaused
+                                    },
+                                label: {
+                                    Text(self.isPaused ? "RESTART" : "PAUSE" )
+                            })
+                            .padding()
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                            timer?.invalidate()
+                                            minutes = 0
+                                            seconds = 0
+                                    },
+                                label: {
+                                    Text("END")
                             })
                             .padding()
                             Spacer()
                         }
                     }
                 }
-                
-                Text("00:00")
+               
+                Text(String(format: "%02d:%02d", minutes, seconds))
                     .bold()
                     .font(.system(size: 50))
                     .padding()
@@ -110,6 +145,17 @@ struct ContentView: View
             })
         }
         
+    }
+    func timeCalculator(timer: Timer) {
+        if(seconds == 0)
+        {
+            minutes = minutes - 1
+            seconds = 59
+        }
+        else
+        {
+            seconds = seconds - 1
+        }
     }
 }
 
