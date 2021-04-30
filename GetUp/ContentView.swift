@@ -1,6 +1,8 @@
 //  Created by Lindsay, Joel, and Andrew
 
 import SwiftUI
+import AppDevWithSwiftLibrary
+
 
 struct ContentView: View
 {
@@ -18,19 +20,21 @@ struct ContentView: View
             VStack {
                 ZStack {
                     RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                        .frame(width:400.0, height: 100.0)
+                        .frame(height: 100.0)
                         .foregroundColor(.yellow)
+                        .padding()
                     Text("The GetUP!")
                         .font(.largeTitle)
                         .bold()
                 }
+                Spacer()
                 Text("Set Timers To Your Liking!")
                 Group {
                     HStack {
                        Text("Sitting Min:")
                         .padding()
                        VStack {
-                        Slider(value: $sittingMin, in: 30.0...60.0)
+                        Slider(value: $sittingMin, in: 0.1...60.0)
                             .padding([.top, .leading, .trailing])
                         
                         HStack {
@@ -90,8 +94,10 @@ struct ContentView: View
                                     timer = Timer.scheduledTimer(withTimeInterval: 1,
                                     repeats: true,
                                     block: timeCalculator)
+                                    AudioPlayer.shared.play(name: "Poles Apart", type: "mp3")
                                 } else {
                                     timer?.invalidate()
+                                    AudioPlayer.shared.pause()
                                 }
                                 self.isPaused = !self.isPaused
                                     },
@@ -106,6 +112,7 @@ struct ContentView: View
                                             timer?.invalidate()
                                             minutes = 0
                                             seconds = 0
+                                AudioPlayer.shared.stop()
                                     },
                                 label: {
                                     Text("END")
@@ -143,10 +150,14 @@ struct ContentView: View
                         Text("More")
                     })
             })
-        }
+        }.navigationBarTitle("",displayMode: .inline)
         
     }
     func timeCalculator(timer: Timer) {
+        if seconds == 0 && minutes == 0 {
+            timer.invalidate()
+            AudioPlayer.shared.play(name: "Poles Apart", type: "mp3")
+        }
         if(seconds == 0)
         {
             minutes = minutes - 1
