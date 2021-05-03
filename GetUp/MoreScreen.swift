@@ -7,7 +7,7 @@ struct MoreScreen: View {
     var body: some View {
         VStack {
             VStack {
-            Text("This is where we will have info on upgrading the app")
+            Text("Click for our suscription page")
 
             }
         }

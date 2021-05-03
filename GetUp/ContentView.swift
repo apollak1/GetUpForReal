@@ -96,10 +96,12 @@ struct ContentView: View
                                     block: timeCalculator)
                                     AudioPlayer.shared.play(name: "Lunar Walk", type: "mp3")
                                 } else {
-                                    timer?.invalidate()
                                     AudioPlayer.shared.pause()
+                                    timer?.invalidate()
+
                                 }
                                 self.isPaused = !self.isPaused
+                                timer?.invalidate()
                                     },
                                 label: {
                                     Text(self.isPaused ? "RESTART" : "PAUSE" )
