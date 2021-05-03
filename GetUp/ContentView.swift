@@ -38,7 +38,7 @@ struct ContentView: View
                             .padding([.top, .leading, .trailing])
                         
                         HStack {
-                            Text("30")
+                            Text("0")
                             Spacer()
                             Text("60")
                         }
@@ -94,7 +94,7 @@ struct ContentView: View
                                     timer = Timer.scheduledTimer(withTimeInterval: 1,
                                     repeats: true,
                                     block: timeCalculator)
-                                    AudioPlayer.shared.play(name: "Poles Apart", type: "mp3")
+                                    AudioPlayer.shared.play(name: "Lunar Walk", type: "mp3")
                                 } else {
                                     timer?.invalidate()
                                     AudioPlayer.shared.pause()
@@ -156,7 +156,7 @@ struct ContentView: View
     func timeCalculator(timer: Timer) {
         if seconds == 0 && minutes == 0 {
             timer.invalidate()
-            AudioPlayer.shared.play(name: "Poles Apart", type: "mp3")
+            AudioPlayer.shared.play(name: "Lunar Walk", type: "mp3")
         }
         if(seconds == 0)
         {
