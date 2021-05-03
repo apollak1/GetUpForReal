@@ -133,7 +133,7 @@ struct ContentView: View
                 HStack
                                     {
                                         Text("Song: ")
-                                        Text("display current song here")
+                                        Text("Lunar Walk.mp3")
                                     }
                 Spacer()
                 
