@@ -70,9 +70,10 @@ struct ContentView: View
                         HStack{
                             Text("Add Five Minutes:")
                                 .padding()
-                            Spacer()
+                            Spacer(minLength: 110)
+                            
                             Button(action: {minutes = minutes + 5},
-                                   label: {Text("ADD FIVE")
+                                   label: {Text("+ FIVE")
                                    })
                                 .padding()
                                 .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
@@ -80,18 +81,19 @@ struct ContentView: View
                             Spacer()
                         }
                         HStack{
+                            Spacer(minLength: 30)
                             Button(action: {
                                 minutes = Int(sittingMin)
                                 timer = Timer.scheduledTimer(withTimeInterval: 1,
                                                              repeats: true,
                                                              block: timeCalculator)
                             }, label: {
-                                Text("START")
+                                Text(" START ")
                             }).padding()
                             .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
                             
                             
-                            Spacer(minLength: 50)
+                            Spacer(minLength: 30)
                             
                             Button(action: {
                                 if (self.isPaused) {
@@ -108,7 +110,7 @@ struct ContentView: View
                                 timer?.invalidate()
                             },
                             label: {
-                                Text(self.isPaused ? "RESTART" : "PAUSE" )
+                                Text(self.isPaused ? "RESTART" : " PAUSE " )
                             })
                             .padding()
                             .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
@@ -122,7 +124,7 @@ struct ContentView: View
                                 AudioPlayer.shared.stop()
                             },
                             label: {
-                                Text("END")
+                                Text(" END  ")
                             })
                             .padding()
                             .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
@@ -175,6 +177,7 @@ struct ContentView: View
         else
         {
             seconds = seconds - 1
+               // .background(Image("AppIcon"), alignment: .center)
         }
     }
 }
