@@ -75,6 +75,8 @@ struct ContentView: View
                                    label: {Text("ADD FIVE")
                                    })
                                 .padding()
+                                .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
+
                             Spacer()
                         }
                         HStack{
@@ -86,7 +88,7 @@ struct ContentView: View
                             }, label: {
                                 Text("START")
                             }).padding()
-                            .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow)
+                            .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
                             
                             
                             Spacer(minLength: 50)
@@ -109,7 +111,8 @@ struct ContentView: View
                                 Text(self.isPaused ? "RESTART" : "PAUSE" )
                             })
                             .padding()
-                            
+                            .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
+
                             Spacer()
                             
                             Button(action: {
@@ -122,6 +125,8 @@ struct ContentView: View
                                 Text("END")
                             })
                             .padding()
+                            .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
+
                             Spacer()
                         }
                     }
