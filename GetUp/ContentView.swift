@@ -17,151 +17,159 @@ struct ContentView: View
     var body: some View
     {
         NavigationView {
-            VStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25.0)
-                        .frame(height: 100.0)
-                        .foregroundColor(.yellow)
-                        .padding()
-                    Text("The GetUP!")
-                        .font(.largeTitle)
-                        .bold()
-                }
-                Spacer()
-                Text("Set Timers To Your Liking!")
-                Group {
-                    HStack {
-                        Text("Sitting Min:")
+            ZStack {
+                Image("Magic Arrow-1")
+                    .resizable()
+                    .scaledToFit()
+                    .opacity(0.2)
+                    .frame(maxWidth: .infinity)
+                VStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25.0)
+                            .frame(height: 100.0)
+                            .foregroundColor(.yellow)
                             .padding()
-                        VStack {
-                            Slider(value: $sittingMin, in: 0.1...60.0)
-                                .padding([.top, .leading, .trailing])
-                            
-                            HStack {
-                                Text("0")
-                                Spacer()
-                                Text("60")
-                            }
-                            .padding(.horizontal)
-                            
-                        }
-                        .padding()
+                        Text("The GetUP!")
+                            .font(.largeTitle)
+                            .bold()
                     }
-                    
-                    HStack {
-                        Text("Move Min:")
+                    Spacer()
+                    Text("Set Timers To Your Liking!")
+                    Group {
+                        HStack {
+                            Text("Sitting Min:")
+                                .padding()
+                            VStack {
+                                Slider(value: $sittingMin, in: 0.1...60.0)
+                                    .padding([.top, .leading, .trailing])
+                                
+                                HStack {
+                                    Text("0")
+                                    Spacer()
+                                    Text("60")
+                                }
+                                .padding(.horizontal)
+                                
+                            }
                             .padding()
-                        VStack {
-                            Slider(value: $moveMin, in: 5.0...15.0)
-                                .padding([.top, .leading, .trailing])
-                            HStack {
-                                Text("5")
-                                Spacer()
-                                Text("15")
+                        }
+                        
+                        HStack {
+                            Text("Move Min:")
+                                .padding()
+                            VStack {
+                                Slider(value: $moveMin, in: 5.0...15.0)
+                                    .padding([.top, .leading, .trailing])
+                                HStack {
+                                    Text("5")
+                                    Spacer()
+                                    Text("15")
+                                }
+                                .padding(.horizontal)
+                                
                             }
-                            .padding(.horizontal)
-                            
+                            .padding()
                         }
-                        .padding()
                     }
-                }
-                Group {
-                    VStack {
-                        HStack{
-                            Text("Add Five Minutes:")
-                                .padding()
-                            Spacer(minLength: 110)
-                            
-                            Button(action: {minutes = minutes + 5},
-                                   label: {Text("+ FIVE")
-                                   })
-                                .padding()
-                                .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
-
-                            Spacer()
-                        }
-                        HStack{
-                            Spacer(minLength: 30)
-                            Button(action: {
-                                minutes = Int(sittingMin)
-                                timer = Timer.scheduledTimer(withTimeInterval: 1,
-                                                             repeats: true,
-                                                             block: timeCalculator)
-                            }, label: {
-                                Text(" START ")
-                            }).padding()
-                            .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
-                            
-                            
-                            Spacer(minLength: 30)
-                            
-                            Button(action: {
-                                if (self.isPaused) {
+                    Group {
+                        VStack {
+                            HStack{
+                                Text("Add Five Minutes:")
+                                    .padding()
+                                Spacer(minLength: 110)
+                                
+                                Button(action: {minutes = minutes + 5},
+                                       label: {Text("+ FIVE")
+                                       })
+                                    .padding()
+                                    .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
+                                
+                                Spacer()
+                            }
+                            HStack{
+                                Spacer(minLength: 30)
+                                Button(action: {
+                                    minutes = Int(sittingMin)
                                     timer = Timer.scheduledTimer(withTimeInterval: 1,
                                                                  repeats: true,
                                                                  block: timeCalculator)
-                                    AudioPlayer.shared.play(name: "Lunar Walk", type: "mp3")
-                                } else {
-                                    AudioPlayer.shared.pause()
+                                }, label: {
+                                    Text(" START ")
+                                }).padding()
+                                .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
+                                
+                                
+                                Spacer(minLength: 30)
+                                
+                                Button(action: {
+                                    if (self.isPaused) {
+                                        timer = Timer.scheduledTimer(withTimeInterval: 1,
+                                                                     repeats: true,
+                                                                     block: timeCalculator)
+                                        AudioPlayer.shared.play(name: "Lunar Walk", type: "mp3")
+                                    } else {
+                                        AudioPlayer.shared.pause()
+                                        timer?.invalidate()
+                                        
+                                    }
+                                    self.isPaused = !self.isPaused
                                     timer?.invalidate()
-                                    
-                                }
-                                self.isPaused = !self.isPaused
-                                timer?.invalidate()
-                            },
-                            label: {
-                                Text(self.isPaused ? "RESTART" : " PAUSE " )
-                            })
-                            .padding()
-                            .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
-
-                            Spacer()
-                            
-                            Button(action: {
-                                timer?.invalidate()
-                                minutes = 0
-                                seconds = 0
-                                AudioPlayer.shared.stop()
-                            },
-                            label: {
-                                Text(" END  ")
-                            })
-                            .padding()
-                            .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
-
-                            Spacer()
+                                },
+                                label: {
+                                    Text(self.isPaused ? "RESTART" : " PAUSE " )
+                                })
+                                .padding()
+                                .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    timer?.invalidate()
+                                    minutes = 0
+                                    seconds = 0
+                                    AudioPlayer.shared.stop()
+                                },
+                                label: {
+                                    Text(" END  ")
+                                })
+                                .padding()
+                                .border(Color.red, width: 5).cornerRadius(10).background(Color.yellow   )
+                                
+                                Spacer()
+                            }
                         }
+                        
                     }
-                }
-                
-                Text(String(format: "%02d:%02d", minutes, seconds))
-                    .bold()
-                    .font(.system(size: 50))
-                    .padding()
-                
-                HStack
-                {
-                    Text("Song: ")
-                    Text("Lunar Walk.mp3")
-                }
-                Spacer()
-                
+                    
+                    Text(String(format: "%02d:%02d", minutes, seconds))
+                        .bold()
+                        .font(.system(size: 50))
+                        .padding()
+                    
+                    HStack
+                    {
+                        Text("Song: ")
+                        Text("Lunar Walk.mp3")
+                    }
+                    Spacer()
+                    
+                }.navigationBarTitle("",displayMode: .inline)
+                .navigationBarItems(leading:
+                                        HStack {
+                                            NavigationLink(
+                                                destination: HelpScreen(),
+                                                label: {
+                                                    Text("Help")
+                                                })
+                                            Spacer(minLength: 300)
+                                            NavigationLink(
+                                                destination: MoreScreen(),
+                                                label: {
+                                                    Text("More")
+                                                })
+                                        })
             }
-            .navigationBarItems(leading:
-                                    HStack {
-                                        NavigationLink(
-                                            destination: HelpScreen(),
-                                            label: {
-                                                Text("Help")
-                                            })
-                                        Spacer(minLength: 300)
-                                        NavigationLink(
-                                            destination: MoreScreen(),
-                                            label: {
-                                                Text("More")
-                                            })
-                                    })
-        }.navigationBarTitle("",displayMode: .inline)
+        }
         
     }
     func timeCalculator(timer: Timer) {
@@ -177,8 +185,8 @@ struct ContentView: View
         else
         {
             seconds = seconds - 1
-               // .background(Image("AppIcon"), alignment: .center)
         }
+        // .background(Image("AppIcon"), alignment: .center)
     }
 }
 
